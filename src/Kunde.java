@@ -1,17 +1,17 @@
 public class Kunde {
-    private int tlf;
+    private int id;
     private String navn;
     private String afhentning;
 
-    public Kunde(int tlf, String navn, String afhentning){
-        this.tlf = tlf;
+    public Kunde(int id, String navn, String afhentning){
+        this.id = id;
         this.navn = navn;
         this.afhentning = afhentning;
     }
-    public int getTlf(){
-        return tlf;
+    public int getId(){
+        return id;
     }
-    public String navn(){
+    public String getNavn(){
         return navn;
     }
     public String getAfhentning(){
