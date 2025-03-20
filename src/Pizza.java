@@ -29,7 +29,7 @@ public class Pizza {
     public String getPizzanavn() {
         return pizzanavn;
     }
-}
+}}
     /*
     public void visPizzaMenu() {
         if (pizzamenu.isEmpty()) {
