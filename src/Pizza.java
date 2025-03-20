@@ -1,15 +1,15 @@
 public class Pizza {
-    private int nummer;
+    private int id;
     private String pizzanavn;
     private double pris;
 
-    public Pizza(int nummer, String pizzanavn, double pris){
-        this.nummer = nummer;
+    public Pizza(int id, String pizzanavn, double pris){
+        this.id = id;
         this.pizzanavn = pizzanavn;
         this.pris = pris;
     }
-    public int getNummer(){
-        return nummer;
+    public int getId(){
+        return id;
     }
     public String getPizzanavn(){
         return pizzanavn;
