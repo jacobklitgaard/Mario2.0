@@ -1,20 +1,29 @@
-public class Pizza {
-    private int id;
-    private String pizzanavn;
-    private double pris;
+public enum Pizza {
+    P1(1, "Vesuvio", 57),
+    P2(2, "Amerikaner", 53),
+    P3(3, "Cacciatore", 57),
+    P4(4, "Carbona", 63),
+    P5(5, "Dennis", 65);
 
-    public Pizza(int id, String pizzanavn, double pris){
-        this.id = id;
-        this.pizzanavn = pizzanavn;
+    private final int nr;
+    private final String navn;
+    private final int pris;
+
+    Pizza(int nr, String navn, int pris) {
+        this.nr = nr;
+        this.navn = navn;
         this.pris = pris;
     }
-    public int getId(){
-        return id;
+
+    public int getNr() {
+        return nr;
     }
-    public String getPizzanavn(){
-        return pizzanavn;
+
+    public String getNavn() {
+        return navn;
     }
-    public double pris(){
+
+    public int getPris() {
         return pris;
     }
 }
