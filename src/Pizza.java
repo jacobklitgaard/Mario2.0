@@ -1,9 +1,4 @@
-public enum Pizza {
-    P1(1, "Vesuvio", 57),
-    P2(2, "Amerikaner", 53),
-    P3(3, "Cacciatore", 57),
-    P4(4, "Carbona", 63),
-    P5(5, "Dennis", 65);
+import java.util.ArrayList;
 
 public class Pizza {
 

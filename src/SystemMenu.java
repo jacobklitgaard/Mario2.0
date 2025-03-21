@@ -2,19 +2,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SystemMenu {
-    private final Scanner scanner = new Scanner(System.in);
-    private final Pizzamenu pizzamenu;
+    private Scanner scanner = new Scanner(System.in);
+    private Pizza pizza;
+    ArrayList<Ordre> ordreliste = new ArrayList<>();
 
-    public SystemMenu(Pizzamenu pizzamenu) {
-        this.pizzamenu = pizzamenu;
+
+    public SystemMenu() {
+        this.pizza = pizza;
     }
 
     public void start() {
         boolean running = true;
 
         while (running) {
-            System.out.println();
-            System.out.println("/// System Menu ///");
+            System.out.println("\n/// System Menu ///");
             System.out.println("1. Vis menu");
             System.out.println("2. Aktive ordrer");
             System.out.println("3. Tilføj ordre");
@@ -42,7 +43,8 @@ public class SystemMenu {
     }
 
     private void visMenu() {
-        pizzamenu.visMenu();
+        PizzaMenu visMenu = new PizzaMenu();
+        visMenu.visPizzaMenu();
     }
 
     private void ordreliste() {
