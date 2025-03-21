@@ -1,8 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-
-//        Pizza pizza = new Pizza();
-        SystemMenu systemMenu = new SystemMenu();
+        Pizzamenu pizzamenu = new Pizzamenu();
+        SystemMenu systemMenu = new SystemMenu(pizzamenu);
         systemMenu.start();
 
     }
