@@ -37,7 +37,6 @@ public class PizzaMenu {
         pizzamenu.add(new Pizza(30, "La Suprema", 150));
     }
 
-
     public ArrayList<Pizza> getPizzamenu() {
         return pizzamenu;
     }

@@ -8,6 +8,7 @@ public class Kunde {
         this.navn = navn;
         this.afhentning = afhentning;
     }
+
     public int getId(){
         return id;
     }
@@ -16,5 +17,11 @@ public class Kunde {
     }
     public String getAfhentning(){
         return afhentning;
+    }
+    @Override
+    public String toString() {
+        return "\nNavn: " + getNavn() +
+               "\nTelefon: " + getId() +
+               "\nAfhentning: " + getAfhentning();
     }
 }

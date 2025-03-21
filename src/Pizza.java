@@ -4,13 +4,23 @@ public class Pizza {
 
     private int nr;
     private String pizzanavn;
+    private int antal;
     private int pris;
 
-
+    //menukort konstruktør
     public Pizza(int nr, String pizzanavn, int pris) {
         this.nr = nr;
         this.pizzanavn = pizzanavn;
         this.pris = pris;
+    }
+
+    //pizza konstruktør
+    public Pizza(int nr, String pizzanavn, int antal, int pris) {
+        this.nr = nr;
+        this.antal = antal;
+        this.pizzanavn = pizzanavn;
+        this.pris = pris;
+        this.antalSolgt = 0;
     }
 
     public int getNr() {
@@ -24,19 +34,28 @@ public class Pizza {
     public String getPizzanavn() {
         return pizzanavn;
     }
-}}
-    /*
-    public void visPizzaMenu() {
-        if (pizzamenu.isEmpty()) {
-            System.out.println("ingen pizzaer, alt udsolgt!");
 
-        } else {
+    public int getAntalSolgt() {
+        return antalSolgt;
+    }
 
-            System.out.println("\n === Marios Pizza Menu === ");
-            for (Pizza pizza : pizzamenu){
-                System.out.println("Nr. " + pizza.getNr() + "- " + pizza.getPizzanavn() + " " + pizza.getPris() + "kr.");
-            }
-        }
-    }*/
+    public void opdaterAntalSolgt(int antal) {
+        this.antalSolgt += antal;
+    }
+
+    public void setPris(int nyPris){
+        this.pris = nyPris;
+
+    }
+
+    @Override
+    public String toString() {
+        return  "\n\nPizza: " + pizzanavn +
+                "\nNr: " + nr +
+                "\npris: " + pris +
+                "\nAntal: " + antal +
+                "\nTotal pris: " + pris + antal;
+    }
+}
 
 
