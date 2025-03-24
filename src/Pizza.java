@@ -54,7 +54,7 @@ public class Pizza {
                 "\nNr: " + nr +
                 "\npris: " + pris +
                 "\nAntal: " + antal +
-                "\nTotal pris: " + pris + antal;
+                "\nTotal pris: " + (pris * antal);
     }
 }
 

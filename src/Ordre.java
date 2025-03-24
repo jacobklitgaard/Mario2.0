@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 
 public class Ordre {
-    private Kunde kunde;
-    private Pizza pizza;
-    private int antal;
-    private boolean erBetalt;
-    private boolean erAfhentet;
-    private ArrayList<Ordre> ordreliste = new ArrayList<>();
-    private Kunde kunde;
+    private ArrayList<Pizza> pizzaliste = new ArrayList<>(); // Her kalder vi på menuen
+  //private boolean erBetalt;
+    // private boolean erAfhentet;
+    private Kunde kunde; // henter kundeobjekter fra Kunde
 
 
     public Ordre(ArrayList<Pizza> pizzaliste, Kunde kunde) {
@@ -17,17 +14,17 @@ public class Ordre {
         this.erAfhentet = false; //Når en ordre oprettes, er den som standard ikke afhentet.
     }
 
-    public void Betalt (){
-        this.erBetalt = true; //Sætter erBetalt til true, så man kan se at ordren er betalt.
-    }
-
-    public void Afhentet(){
-        this.erAfhentet = true;
-    }
-
-    public boolean Afsluttet(){
-        return erBetalt && erAfhentet; // Returnerer true hvis ordren både er betalt og afhentet.
-    }
+//    public void Betalt (){
+//        this.erBetalt = true; //Sætter erBetalt til true, så man kan se at ordren er betalt.
+//    }
+//
+//    public void Afhentet(){
+//        this.erAfhentet = true;
+//    }
+//
+//    public boolean Afsluttet(){
+//        return erBetalt && erAfhentet; // Returnerer true hvis ordren både er betalt og afhentet.
+//    }
 
     public Kunde kundeId() { //Returnerer ordrens kunde id.
         return Kunde;
@@ -38,8 +35,8 @@ public class Ordre {
         int i;
         for (i = 0; i < pizzaliste.size()-1; i++) {
             pizzaliste.get(i);
-        } return "\nBestilling: \n" + pizzaliste + "\nNavn: " +
-                kunde.getNavn() + "\nTelefon: " + kunde.getId() + "\nAfhentning: " + kunde.getAfhentning() + "\n";
+        } return "\nBestilling: \n" + pizzaliste + "\n\nNavn: " +
+                kunde.getNavn() + "\nTelefon: " + kunde.getTlf() + "\nAfhentning: " + kunde.getAfhentning() + "\n";
     }
 
 //    public void markerSomBetalt(String Kunde) { //Denne metode markerer en ordre som betalt baseret på dens ID.

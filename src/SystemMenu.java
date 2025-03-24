@@ -1,10 +1,13 @@
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 public class SystemMenu {
     private Scanner scanner = new Scanner(System.in);
     private Pizza pizza;
+    private String afhentningString;
+    private Kunde kunde;
+
 
 
     ArrayList<Ordre> ordreliste = new ArrayList<>();
@@ -57,6 +60,10 @@ public class SystemMenu {
         while (running)  {
             System.out.println("\n--- Aktive ordrer ---");
 
+            // Sorterer ordrene efter tid.
+            Collections.sort(ordreliste, Comparator.comparing(o -> o.getKunde().getAfhentning()));
+
+
             System.out.println(ordreliste);
             System.out.println("fjern ordre: 1");
             System.out.println("Gå tilbage: 2");
@@ -73,7 +80,7 @@ public class SystemMenu {
     int antal;
     int telefonnummer;
     String navn;
-    String afhentning;
+    LocalTime afhentning;
     PizzaMenu pizzamenu = new PizzaMenu();
 
 
@@ -104,7 +111,7 @@ public class SystemMenu {
             antal = scanner.nextInt();
             scanner.nextLine();
 
-            Pizza pizzaMedAntal = new Pizza(pizza.getNr(),pizza.getPizzanavn(), antal, pizza.getPris());
+            Pizza pizzaMedAntal = new Pizza(pizza.getNr(), pizza.getPizzanavn(), antal, pizza.getPris());
 
 
             pizzaer.add(pizzaMedAntal);
@@ -117,13 +124,43 @@ public class SystemMenu {
             }
 
         }
-            System.out.println("Indtast telefonnummer: ");
-            telefonnummer = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("Indtast fornavn: ");
-            navn = scanner.nextLine();
-            System.out.println("Indtast afhentning: ");
-            afhentning = scanner.nextLine();
+
+        boolean nummer = true;
+
+        while (nummer) {
+
+            try {
+                System.out.println("Indtast telefonnummer: ");
+                telefonnummer = scanner.nextInt();
+                scanner.nextLine();
+
+                if (telefonnummer < 10000000 || telefonnummer > 99999999) {
+                    System.out.println("Telefonnummer skal være 8 cifre");
+                } else {
+                    nummer = false;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Det var for langt, prøv igen");
+                scanner.nextLine();
+            }
+        }
+
+        System.out.println("Indtast fornavn: ");
+        navn = scanner.nextLine();
+
+        while (true) {
+            try {
+                System.out.println("Indtast afhentning:  ");
+                afhentningString = scanner.nextLine();
+                afhentning = LocalTime.parse(afhentningString);
+                break;
+            } catch (
+                    DateTimeParseException a) { //Her catcher vi den fejlmenldning der kommer i terminalen hvis Mario skriver klokken i forkert format.
+                System.out.println("Skriv i et rigtigt format Fx : 08:00");
+            }
+        }
+
+        System.out.println(afhentning);
 
             Kunde kunde = new Kunde(telefonnummer, navn, afhentning);
             Ordre ordre = new Ordre(pizzaer, kunde);
@@ -132,6 +169,6 @@ public class SystemMenu {
 
             ordreliste.add(ordre);
 
-
-        }
     }
+}
+

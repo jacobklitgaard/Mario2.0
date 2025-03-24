@@ -1,27 +1,29 @@
-public class Kunde {
-    private int id;
-    private String navn;
-    private String afhentning;
+import java.time.LocalTime;
 
-    public Kunde(int id, String navn, String afhentning){
-        this.id = id;
+public class Kunde {
+    private int tlf;
+    private String navn;
+    private LocalTime afhentning; //LocalTime til at hente klokkeslæt som variable
+
+    public Kunde(int tlf, String navn, LocalTime afhentning){
+        this.tlf = tlf;
         this.navn = navn;
         this.afhentning = afhentning;
     }
-
-    public int getId(){
-        return id;
+// Her laver vi getter, for at kunne hente oplysningene fra denne klasse over i en anden class.
+    public int getTlf(){
+        return tlf;
     }
     public String getNavn(){
         return navn;
     }
-    public String getAfhentning(){
+    public LocalTime getAfhentning() {
         return afhentning;
     }
     @Override
     public String toString() {
         return "\nNavn: " + getNavn() +
-               "\nTelefon: " + getId() +
+               "\nTelefon: " + getTlf() +
                "\nAfhentning: " + getAfhentning();
     }
 }
