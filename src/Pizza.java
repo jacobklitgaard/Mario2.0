@@ -61,11 +61,13 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return  "\n\nPizza: " + pizzanavn +
+        return  "------------------]" +
+                "\nPizza: " + pizzanavn +
                 "\nNr: " + nr +
-                "\npris: " + pris +
                 "\nAntal: " + antal +
-                "\nI alt: " + (pris * antal);
+                "\npris: " + pris + "kr" +
+                "\nI alt: " + (pris * antal) + "kr\n"
+                + "[------------------";
     }
 }
 

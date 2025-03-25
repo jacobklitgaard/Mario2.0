@@ -54,7 +54,6 @@ public class SystemMenu {
             }
         }
     }
-
     private void ændrePris() {
         Scanner input = new Scanner(System.in); // her laver vi en scanner, hvor vi som bruger kan inputte noget eller ændre koden
         visMenu(); // den viser menuen
@@ -101,27 +100,26 @@ public class SystemMenu {
             // Sorterer ordrene efter tid.
             Collections.sort(ordreliste, Comparator.comparing(o -> o.getKunde().getAfhentning()));
             for (int i = 0; i < ordreliste.size(); i++){
-                System.out.println(i + " : " + ordreliste.get(i).toString());
+                System.out.println("\u001B[3mBestillingsnummer\u001B[0m: " + i + ordreliste.get(i).toString());
             }
 
-            System.out.println("\nFjern ordre: Tast 1");
+            System.out.println("Fjern ordre: Tast 1");
             System.out.println("Tilbage: Tast 2");
             String valg = scanner.nextLine();
             if (valg.equalsIgnoreCase("1")) {
-                    System.out.println("Skriv bestillings nummer (Index nr) efterfulgt af enter" +
-                            "\nfor at fjerne en bestilling fra listen");
+                    System.out.println("Indtast det \u001B[3mbestillingsnummer\u001B[0m, som du ønsker at fjerne!");
                     int index = scanner.nextInt();
                     scanner.nextLine();
                     if (index >= 0 && index < ordreliste.size()) {
                         ordreliste.remove(index);
-                        System.out.println("Bestillings nr " + index + " er nu fjernet fra aktive ordre!");
+                        System.out.println("Bestillingsnummer " + index + " er nu fjernet fra ordrelisten!");
                     } else {
-                        System.out.println("ugyldigt index! prøv igen");
+                        System.out.println("Ugyldigt \u001B[3mbestillingsnummer\u001B[0m! Prøv igen: ");
                     }
             } else if (valg.equalsIgnoreCase("2")) {
                 running = false;
             } else {
-                System.out.println("Forkert input, prøv igen");
+                System.out.println("Forkert input! Prøv igen: ");
             }
         }
     }
@@ -171,7 +169,7 @@ public class SystemMenu {
                     //While loop til at tjekke om pizzaen er i pizzamenuen.
                     //Hvis der tastes forkert pizza, beder om at indtaste pizza nr igen.
                     while (nr <= 0 || nr > pizzamenu.getPizzamenu().size()) {
-                        System.out.println("Indtast pizzanummer 1- " + pizzamenu.getPizzamenu().size());
+                        System.out.println("Indtast pizzanummer (1-" + pizzamenu.getPizzamenu().size() + "): ");
                         nr = scanner.nextInt();
                         scanner.nextLine();
                     }
@@ -200,7 +198,6 @@ public class SystemMenu {
                     String choice = scanner.nextLine().toLowerCase();
                     if (choice.equals("j")) { //Hvis user vælger "Nej", lukker tilføj pizza loopet,
                                                 // og hopper videre til kundeoplysninger.
-
                     }
                     else{
                         running = false;
