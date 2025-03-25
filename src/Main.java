@@ -4,6 +4,5 @@ public class Main {
 //        Pizza pizza = new Pizza();
         SystemMenu systemMenu = new SystemMenu();
         systemMenu.start();
-
     }
 }

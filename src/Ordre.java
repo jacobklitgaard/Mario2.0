@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
 public class Ordre {
-    private ArrayList<Pizza> pizzaliste = new ArrayList<>(); // Her kalder vi på menuen
+    private ArrayList<Pizza> pizzaliste; // Her kalder vi på menuen
   //private boolean erBetalt;
     // private boolean erAfhentet;
     private Kunde kunde; // henter kundeobjekter fra Kunde
 
 
-    public Ordre(ArrayList<Pizza> pizzaliste, Kunde kunde) {
+    public Ordre(ArrayList<Pizza> pizzaliste, Kunde kunde, int totalPris) {
         this.kunde = kunde;
         this.pizzaliste = pizzaliste;
         this.erBetalt = false; //Når en ordre oprettes, er den som standard ikke betalt.
@@ -36,7 +36,8 @@ public class Ordre {
         for (i = 0; i < pizzaliste.size()-1; i++) {
             pizzaliste.get(i);
         } return "\nBestilling: \n" + pizzaliste + "\n\nNavn: " +
-                kunde.getNavn() + "\nTelefon: " + kunde.getTlf() + "\nAfhentning: " + kunde.getAfhentning() + "\n";
+                kunde.getNavn() + "\nTelefon: " + kunde.getTlf() + "\nAfhentning: " + kunde.getAfhentning() + "\n" +
+                "\nTotal: " + totalPris;
     }
 
 //    public void markerSomBetalt(String Kunde) { //Denne metode markerer en ordre som betalt baseret på dens ID.

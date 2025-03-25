@@ -7,21 +7,26 @@ public class Pizza {
     private int antal;
     private int pris;
 
-    //menukort konstruktør
+    //menukort og enkelt pizza-konstruktør
     public Pizza(int nr, String pizzanavn, int pris) {
         this.nr = nr;
         this.pizzanavn = pizzanavn;
         this.pris = pris;
     }
 
-    //pizza konstruktør
+    //pizzaMedAntal konstruktør
     public Pizza(int nr, String pizzanavn, int antal, int pris) {
         this.nr = nr;
         this.antal = antal;
         this.pizzanavn = pizzanavn;
         this.pris = pris;
-        this.antalSolgt = 0;
     }
+
+
+    public void setAntalSolgt(int antal) {
+        this.antalSolgt += antal;
+    }
+
 
     public int getNr() {
         return nr;
@@ -29,6 +34,10 @@ public class Pizza {
 
     public int getPris() {
         return pris;
+    }
+
+    public int getAntal() {
+        return antal;
     }
 
     public String getPizzanavn() {
@@ -54,7 +63,7 @@ public class Pizza {
                 "\nNr: " + nr +
                 "\npris: " + pris +
                 "\nAntal: " + antal +
-                "\nTotal pris: " + (pris * antal);
+                "\nI alt: " + (pris * antal);
     }
 }
 
