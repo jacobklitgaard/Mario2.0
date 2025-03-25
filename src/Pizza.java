@@ -1,27 +1,33 @@
 import java.util.ArrayList;
-
+//Pizza konstruktor
 public class Pizza {
 
     private int nr;
     private String pizzanavn;
     private int antal;
-    private int pris;
+    private int pris;   //skal det måske være double?//
+    private int antalSolgt;
 
-    //menukort konstruktør
+    //menukort og enkelt pizza-konstruktør
     public Pizza(int nr, String pizzanavn, int pris) {
         this.nr = nr;
         this.pizzanavn = pizzanavn;
         this.pris = pris;
     }
 
-    //pizza konstruktør
+    //pizzaMedAntal konstruktør
     public Pizza(int nr, String pizzanavn, int antal, int pris) {
         this.nr = nr;
         this.antal = antal;
         this.pizzanavn = pizzanavn;
         this.pris = pris;
-        this.antalSolgt = 0;
     }
+
+
+    public void setAntalSolgt(int antal) {
+        this.antalSolgt += antal;
+    }
+
 
     public int getNr() {
         return nr;
@@ -29,6 +35,10 @@ public class Pizza {
 
     public int getPris() {
         return pris;
+    }
+
+    public int getAntal() {
+        return antal;
     }
 
     public String getPizzanavn() {
@@ -40,7 +50,7 @@ public class Pizza {
     }
 
     public void opdaterAntalSolgt(int antal) {
-        this.antalSolgt += antal;
+        this.antal += antalSolgt;
     }
 
     public void setPris(int nyPris){
@@ -48,13 +58,14 @@ public class Pizza {
 
     }
 
+
     @Override
     public String toString() {
         return  "\n\nPizza: " + pizzanavn +
                 "\nNr: " + nr +
                 "\npris: " + pris +
                 "\nAntal: " + antal +
-                "\nTotal pris: " + (pris * antal);
+                "\nI alt: " + (pris * antal);
     }
 }
 

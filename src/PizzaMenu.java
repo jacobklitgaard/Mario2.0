@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PizzaMenu {
     private ArrayList<Pizza> pizzamenu = new ArrayList<>();
 
     public PizzaMenu() {
-
+//Array over de forskellige Pizzaer
         pizzamenu.add(new Pizza(1, "Vesuvio", 57));
         pizzamenu.add(new Pizza(2, "Amerikaner", 53));
         pizzamenu.add(new Pizza(3, "Cacciatore", 57));
@@ -41,13 +42,17 @@ public class PizzaMenu {
         return pizzamenu;
     }
 
+    //Pizza menu metode.
     public void visPizzaMenu() {
         if (pizzamenu.isEmpty()) {
             System.out.println("ingen pizzaer, alt udsolgt!");
         } else {
-            System.out.println("\n === Marios Pizza Menu === ");
-            for (Pizza pizza : pizzamenu){
-                System.out.println("Nr. " + pizza.getNr() + "- " + pizza.getPizzanavn() + " " + pizza.getPris() + "kr.");
+            System.out.println("\n === Menukort === \n");
+            System.out.printf("%-5s%-25s%-15s%-15s\n", "Nr.", "Pizza", "Pris", "Antal solgte");
+            for (Pizza pizza : pizzamenu) {
+                System.out.printf("%-5d%-25s%-15d%-15d\n", pizza.getNr(), pizza.getPizzanavn(), pizza.getPris(), pizza.getAntalSolgt());
+
+                //halløj
             }
         }
     }
