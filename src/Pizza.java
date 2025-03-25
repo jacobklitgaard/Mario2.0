@@ -1,11 +1,12 @@
 import java.util.ArrayList;
-
+//Pizza konstruktor
 public class Pizza {
 
     private int nr;
     private String pizzanavn;
     private int antal;
-    private int pris;
+    private int pris;   //skal det måske være double?//
+    private int antalSolgt;
 
     //menukort og enkelt pizza-konstruktør
     public Pizza(int nr, String pizzanavn, int pris) {
@@ -49,13 +50,14 @@ public class Pizza {
     }
 
     public void opdaterAntalSolgt(int antal) {
-        this.antalSolgt += antal;
+        this.antal += antalSolgt;
     }
 
     public void setPris(int nyPris){
         this.pris = nyPris;
 
     }
+
 
     @Override
     public String toString() {

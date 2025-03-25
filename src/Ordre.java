@@ -5,14 +5,21 @@ public class Ordre {
   //private boolean erBetalt;
     // private boolean erAfhentet;
     private Kunde kunde; // henter kundeobjekter fra Kunde
+    private int totalPris;
+
 
 
     public Ordre(ArrayList<Pizza> pizzaliste, Kunde kunde, int totalPris) {
         this.kunde = kunde;
         this.pizzaliste = pizzaliste;
-        this.erBetalt = false; //Når en ordre oprettes, er den som standard ikke betalt.
-        this.erAfhentet = false; //Når en ordre oprettes, er den som standard ikke afhentet.
+        this.totalPris = totalPris;
+      //  this.erBetalt = false; //Når en ordre oprettes, er den som standard ikke betalt.
+        //  this.erAfhentet = false; //Når en ordre oprettes, er den som standard ikke afhentet.
     }
+    public Kunde getKunde () {
+        return kunde;
+    }
+
 
 //    public void Betalt (){
 //        this.erBetalt = true; //Sætter erBetalt til true, så man kan se at ordren er betalt.
@@ -26,14 +33,10 @@ public class Ordre {
 //        return erBetalt && erAfhentet; // Returnerer true hvis ordren både er betalt og afhentet.
 //    }
 
-    public Kunde kundeId() { //Returnerer ordrens kunde id.
-        return Kunde;
-    }
 
     @Override
     public String toString() {
-        int i;
-        for (i = 0; i < pizzaliste.size()-1; i++) {
+        for (int i = 0; i < pizzaliste.size()-1; i++) {
             pizzaliste.get(i);
         } return "\nBestilling: \n" + pizzaliste + "\n\nNavn: " +
                 kunde.getNavn() + "\nTelefon: " + kunde.getTlf() + "\nAfhentning: " + kunde.getAfhentning() + "\n" +
