@@ -153,7 +153,7 @@ public class SystemMenu {
         //While loop til at tilføje flere bestillinger
         while (running) {
             //Væglger et pizza nummer og opretter et object fra pizzamenuen
-            System.out.println("\nIndtast pizzanummer (1-30): " + RESET);
+            System.out.println("Indtast pizzanummer (1-30): " + RESET);
             nr = scanner.nextInt();
             scanner.nextLine();
                     //While loop til at tjekke om pizzaen er i pizzamenuen.
@@ -188,7 +188,6 @@ public class SystemMenu {
                     String choice = scanner.nextLine().toLowerCase();
                     if (choice.equals("j")) { //Hvis user vælger "Nej", lukker tilføj pizza loopet,
                                                 // og hopper videre til kundeoplysninger.
-
                     }
                     else{
                         running = false;
