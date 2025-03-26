@@ -3,37 +3,43 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class SystemMenu {
+    // ANSI-farvekoder
+    public static final String RESET = "\u001B[0m";    // Nulstil farve
+    public static final String RØD = "\u001B[31m";     // Rød tekst
+    public static final String GRØN = "\u001B[32m";    // Grøn tekst
+    public static final String GUL = "\u001B[33m";     // Gul tekst
+    public static final String BLÅ = "\u001B[34m";     // Blå tekst
+    public static final String CYAN = "\u001B[36m";    // Cyan tekst
     // Variabler og importerede klasser
     private Scanner scanner = new Scanner(System.in);
     private Pizza pizza;
     private String afhentningString;
-    private Kunde kunde;
+    //private Kunde kunde;
 
-    public Pizza getPizza(){
-        return pizza;
-    }
+//    public Pizza getPizza(){
+//        return pizza;
+//    }
 
     ArrayList<Ordre> ordreliste = new ArrayList<>();
 
     //tom constructor???
-    public SystemMenu() {
-        this.pizza = pizza;
-    }
+//    public SystemMenu() {
+////        this.pizza = pizza;
+//    }
 
     //System menuen
     public void start() {
         boolean running = true;
 
         while (running) {   //While loop til at holde systemet igang
-            System.out.println("\n/// System Menu ///");
-            System.out.println("1. Vis menu");
-            System.out.println("2. Aktive ordrer"); // Ordreliste
-            System.out.println("3. Tilføj ordre");
-            System.out.println("4. Ordrehistorik");
-            System.out.println("5. Kundehistorik (Nice to have)"); // Skal muligvis ikke bruges?
-            System.out.println("6. Ændre pris på pizza");
-            System.out.println("7. Afslut");
-            System.out.print("\nIndtast valg: ");
+            System.out.println(CYAN + "\n/// System Menu ///" + RESET);
+            System.out.println(GRØN + "1. Vis Menu" + RESET);
+            System.out.println(GUL + "2. Bestillinger" + RESET); // Ordreliste
+            System.out.println(RØD + "3. Tilføj ordre" + RESET);
+            System.out.println(GRØN + "4. Omsætning" + RESET);
+            System.out.println(GUL + "5. Prisændring" + RESET);
+            System.out.println(RØD + "6. Afslut Program" + RESET);
+            System.out.print(CYAN + "\nIndtast valg: " + RESET);
 
             int choice = scanner.nextInt();     //Gemmer brugerens input i en int,
             scanner.nextLine();                 //  som bruges i Switch case
@@ -42,12 +48,12 @@ public class SystemMenu {
                 case 1 -> visMenu();
                 case 2 -> visAktiveOrdrer();
                 case 3 -> tilfoejOrdre();
-                case 4 -> seOrdreHistorik();
-                case 5 -> visKunde();
-                case 6 -> ændrePris();
-                case 7 -> {
+                case 4 -> samletSalg();
+                case 5 -> ændrePris();
+                case 6 -> {
                     System.out.println("\nSystem afsluttes...");
                     running = false;    //programmet afsluttes når man trykker på 7 (boolean == false).
+                    scanner.close();
                 }
                 default -> System.out.println("Ugyldigt valg. Prøv igen."); //sender fejlbesked og gentager kode
                 //hvis der modtages forkert int
@@ -61,7 +67,7 @@ public class SystemMenu {
         int PizzaNummer = input.nextInt(); // her har vi en int variabel der giver os muligheden for at indtaste nummeret på pizzaen der skal ændres
         input.nextLine(); // buffer
 
-        ArrayList<Pizza> pizzaliste = pizzamenu.getPizzamenu(); // her henter vi på vores arrayliste som er pizzamenuen fra pizza klassen
+        //ArrayList<Pizza> pizzaliste = pizzamenu.getPizzamenu(); // her henter vi på vores arrayliste som er pizzamenuen fra pizza klassen
 
         Pizza ValgtPizza = null; // Initialiserer en variabel til at holde den valgte pizza. Sættes til null, hvis ingen pizza matches.
         for (Pizza pizza : pizzamenu.getPizzamenu()) { // Går igennem listen af pizzaer i menuen én efter én.
@@ -82,7 +88,7 @@ public class SystemMenu {
         int nyPris = input.nextInt(); // Gemmer den nye pris
 
         ValgtPizza.setPris(nyPris); // vi bruger settter, og nu Opdatere den den nye pris.
-        System.out.println("Prisen på " + ValgtPizza.getPizzanavn() + " er nu ændret til " + ValgtPizza.getPris() + "kr"); // bekræfter ændringerne
+        System.out.println("Prisen på " + ValgtPizza.getPizzanavn() + " er nu ændret til " + ValgtPizza.getPris() + " kr"); // bekræfter ændringerne
         //visMenu(); // viser den opdateret meny igen
 
     }
@@ -100,22 +106,21 @@ public class SystemMenu {
             // Sorterer ordrene efter tid.
             Collections.sort(ordreliste, Comparator.comparing(o -> o.getKunde().getAfhentning()));
             for (int i = 0; i < ordreliste.size(); i++){
-                System.out.println("\u001B[3mBestillingsnummer\u001B[0m: " + i + ordreliste.get(i).toString());
+                System.out.println("\u001B[3mBestillingsnummer\u001B[0m: " + (i + 1) + ordreliste.get(i).toString());
             }
-
             System.out.println("Fjern ordre: Tast 1");
             System.out.println("Tilbage: Tast 2");
             String valg = scanner.nextLine();
             if (valg.equalsIgnoreCase("1")) {
-                    System.out.println("Indtast det \u001B[3mbestillingsnummer\u001B[0m, som du ønsker at fjerne!");
-                    int index = scanner.nextInt();
-                    scanner.nextLine();
-                    if (index >= 0 && index < ordreliste.size()) {
-                        ordreliste.remove(index);
-                        System.out.println("Bestillingsnummer " + index + " er nu fjernet fra ordrelisten!");
-                    } else {
-                        System.out.println("Ugyldigt \u001B[3mbestillingsnummer\u001B[0m! Prøv igen: ");
-                    }
+                System.out.println("Indtast det \u001B[3mbestillingsnummer\u001B[0m, som du ønsker at fjerne!");
+                int index = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (index >= 0 && index < ordreliste.size()) {
+                    ordreliste.remove(index);
+                    System.out.println("Bestillingsnummer " + (index + 1) + " er nu fjernet fra ordrelisten!");
+                } else {
+                    System.out.println("Ugyldigt \u001B[3mbestillingsnummer\u001B[0m! Prøv igen: ");
+                }
             } else if (valg.equalsIgnoreCase("2")) {
                 running = false;
             } else {
@@ -124,34 +129,26 @@ public class SystemMenu {
         }
     }
 
+    private int nr;
+    private int antal;
+    private int telefonnummer;
+    private String navn;
+    private LocalTime afhentning;
+    private int totalPris = 0;
+    private int samletOmsætning;
+    private int samletAntal;
+    private PizzaMenu pizzamenu = new PizzaMenu();
+//    Ordrehistorik ordrehistorik = new Ordrehistorik();
+//    ArrayList<Pizza> historik = ordrehistorik.getGemteOrdre();
 
-    int nr;
-    int antal;
-    int telefonnummer;
-    String navn;
-    LocalTime afhentning;
-    int totalPris;
-    PizzaMenu pizzamenu = new PizzaMenu();
-    Ordrehistorik ordrehistorik = new Ordrehistorik();
-    ArrayList<Pizza> historik = ordrehistorik.getGemteOrdre();
+    public void samletSalg() {
 
+//        System.out.println(historik);
+//        //ArrayList.sort(null);
+//        double omsætning = ordrehistorik.getOmsætning();
+        System.out.println("\nSolgte pizzaer: " + samletAntal);
+        System.out.println("Samlet omsætning: " + samletOmsætning + " kr. ");
 
-
-    public void seOrdreHistorik() {
-
-        System.out.println("Viser ordrehistorik... (Skal laves)");
-        System.out.println(historik);
-        //ArrayList.sort(null);
-        ordrehistorik.visPizzaSalg();
-        ordrehistorik.visPizzaerSorteretEfterSalg();
-
-
-        System.out.println("samlet omsætning" + ordrehistorik.getOmsætning() + " kr. ");
-
-    }
-
-    private void visKunde() {
-        System.out.println("Viser kunde... (Nice to have)");
     }
 
     private void tilfoejOrdre() {
@@ -166,89 +163,91 @@ public class SystemMenu {
             System.out.println("Indtast pizzanummer (1-30): " + RESET);
             nr = scanner.nextInt();
             scanner.nextLine();
-                    //While loop til at tjekke om pizzaen er i pizzamenuen.
-                    //Hvis der tastes forkert pizza, beder om at indtaste pizza nr igen.
-                    while (nr <= 0 || nr > pizzamenu.getPizzamenu().size()) {
-                        System.out.println("Indtast pizzanummer (1-" + pizzamenu.getPizzamenu().size() + "): ");
-                        nr = scanner.nextInt();
-                        scanner.nextLine();
-                    }
-                    pizza = pizzamenu.getPizzamenu().get(nr - 1); //Tilføjer pizza objekt til
-                    //Tilføjer antal af pizza objekt
-                    System.out.println("Indtast antal: ");
-                    while(true) {
-                        try {
-                            antal = scanner.nextInt();
-                            scanner.nextLine();
-                            antal = Math.abs(antal);
-                            break;
-                        } catch (InputMismatchException e1) {
-                            System.out.println("Ugyldigt antal. Prøv igen: ");
-                            scanner.nextLine();
-                        }
-                    }
-                    //Pizza objektet oprettes og tilføjes til Pizzaer arrayListe
-                    Pizza pizzaMedAntal = new Pizza(pizza.getNr(), pizza.getPizzanavn(), antal, pizza.getPris());
-                    pizzaer.add(pizzaMedAntal);
-                    //Objektet tilføjes til ordreliste arrayListe
-                    ordrehistorik.tilføjPizza(pizzaMedAntal);
-                    totalPris += pizza.getPris() * antal; //Variable til totalpris
-                    //Giver user mulighed til at tilføje flere pizzaer
-                    System.out.println("Tilføj mere? j/n");
-                    String choice = scanner.nextLine().toLowerCase();
-                    if (choice.equals("j")) { //Hvis user vælger "Nej", lukker tilføj pizza loopet,
-                                                // og hopper videre til kundeoplysninger.
-                    }
-                    else{
-                        running = false;
-                    }
-                }
-                //tilføjer telefon nummer til bestillingen.
-                while (true) {
-                    try { //Try catch, til at fange inputMisMatchException (input over 2147483647 integeres)
-                        System.out.println("Indtast telefonnummer: ");
-                        telefonnummer = scanner.nextInt();
-                        scanner.nextLine();
-                        //Hvis nummeret ikke er 8 cifre, vil loopet gentage sig.
-                        if (telefonnummer < 10000000 || telefonnummer > 99999999) {
-                            System.out.println("Forkert nummer");
-                        } else {
-                            break;
-                        }
-                    } catch (InputMismatchException e2) {
-                        System.out.println("Forkert nummer");
-                        scanner.nextLine();
-                    }
-                }
-                //Tilføjer navn til bestillingen.
-                System.out.println("Indtast fornavn: ");
-                navn = scanner.nextLine();
-                //Tilføjer afhentingstidspunkt
-                while (true) {
-                    try { //Try catch til at fange DateTimeParseException, hvis inputtet er forkert format.
-                        System.out.println("Indtast afhentning:  ");
-                        afhentningString = scanner.nextLine();
-                        afhentning = LocalTime.parse(afhentningString);
-                        break;
-                    } catch (
-                            DateTimeParseException a) { //Her catcher vi den fejlmeldning der kommer i terminalen hvis Mario skriver klokken i forkert format.
-                        System.out.println("Skriv i formatet TT:MM");
-                    }
-                }
-                //her oprettes et kunde objekt med variablerne
-                Kunde kunde = new Kunde(telefonnummer, navn, afhentning);
-                //her oprettes et ordre objekt med pizza arraylisten, kunde objektet og totalpris variablen.
-                //pizzaer arraylisten indeholder alle pizzaer der er i ordren
-                //kunde objektet er det som lige er blevet lavet over denne tekst
-                //totalpris er variablen, som udregner totalprisen til slut i bestillingen
-                Ordre ordre = new Ordre(pizzaer, kunde, totalPris);
-                //ordrelisten printes.
-                System.out.println(ordre);
-                ordreliste.add(ordre);
-
-                pizza.setAntalSolgt(antal);
-
+            //While loop til at tjekke om pizzaen er i pizzamenuen.
+            //Hvis der tastes forkert pizza, beder om at indtaste pizza nr igen.
+            while (nr <= 0 || nr > pizzamenu.getPizzamenu().size()) {
+                System.out.println("Indtast pizzanummer (1-" + pizzamenu.getPizzamenu().size() + "): ");
+                nr = scanner.nextInt();
+                scanner.nextLine();
             }
+            pizza = pizzamenu.getPizzamenu().get(nr - 1); //Tilføjer pizza objekt til
+            //Tilføjer antal af pizza objekt
+            System.out.println("Indtast antal: ");
+            while (true) {
+                try {
+                    antal = scanner.nextInt();
+                    scanner.nextLine();
+                    antal = Math.abs(antal);
 
+                    break;
+                } catch (InputMismatchException e1) {
+                    System.out.println("Ugyldigt antal. Prøv igen: ");
+                    scanner.nextLine();
+                }
+            }
+            //Pizza objektet oprettes og tilføjes til Pizzaer arrayListe
+            Pizza pizzaMedAntal = new Pizza(pizza.getNr(), pizza.getPizzanavn(), antal, pizza.getPris());
+            pizzaer.add(pizzaMedAntal);
+            //Objektet tilføjes til ordreliste arrayListe
+            //ordrehistorik.tilføjPizza(pizzaMedAntal);
+
+
+            //Giver user mulighed til at tilføje flere pizzaer
+            System.out.println("Tilføj mere? j/n");
+            String choice = scanner.nextLine().toLowerCase();
+            if (choice.equals("j")) { //Hvis user vælger "Nej", lukker tilføj pizza loopet,
+                // og hopper videre til kundeoplysninger.
+            }
+            else{
+                running = false;
+            }
+            pizza.setAntalSolgt(antal);
+            totalPris += pizza.getPris() * antal; //Variable til totalpris
+            samletOmsætning += totalPris;
+            samletAntal += antal;
         }
+        //tilføjer telefon nummer til bestillingen.
+        while (true) {
+            try { //Try catch, til at fange inputMisMatchException (input over 2147483647 integeres)
+                System.out.println("Indtast telefonnummer: ");
+                telefonnummer = scanner.nextInt();
+                scanner.nextLine();
+                //Hvis nummeret ikke er 8 cifre, vil loopet gentage sig.
+                if (telefonnummer < 10000000 || telefonnummer > 99999999) {
+                    System.out.println("Forkert nummer");
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e2) {
+                System.out.println("Forkert nummer");
+                scanner.nextLine();
+            }
+        }
+        //Tilføjer navn til bestillingen.
+        System.out.println("Indtast fornavn: ");
+        navn = scanner.nextLine();
+        //Tilføjer afhentingstidspunkt
+        while (true) {
+            try { //Try catch til at fange DateTimeParseException, hvis inputtet er forkert format.
+                System.out.println("Indtast afhentning:  ");
+                afhentningString = scanner.nextLine();
+                afhentning = LocalTime.parse(afhentningString);
+                break;
+            } catch (
+                    DateTimeParseException a) { //Her catcher vi den fejlmeldning der kommer i terminalen hvis Mario skriver klokken i forkert format.
+                System.out.println("Skriv i formatet TT:MM");
+            }
+        }
+        //her oprettes et kunde objekt med variablerne
+        Kunde kunde = new Kunde(telefonnummer, navn, afhentning);
+        //her oprettes et ordre objekt med pizza arraylisten, kunde objektet og totalpris variablen.
+        //pizzaer arraylisten indeholder alle pizzaer der er i ordren
+        //kunde objektet er det som lige er blevet lavet over denne tekst
+        //totalpris er variablen, som udregner totalprisen til slut i bestillingen
+        Ordre ordre = new Ordre(pizzaer, kunde, totalPris);
+        //ordrelisten printes.
+        System.out.println(ordre);
+        ordreliste.add(ordre);
+    }
+}
 

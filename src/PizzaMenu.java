@@ -1,11 +1,18 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class PizzaMenu {
     private ArrayList<Pizza> pizzamenu = new ArrayList<>();
 
+    // ANSI-farvekoder
+    public static final String RESET = "\u001B[0m";    // Nulstil farve
+    public static final String RØD = "\u001B[31m";     // Rød tekst
+    public static final String GRØN = "\u001B[32m";    // Grøn tekst
+    public static final String GUL = "\u001B[33m";     // Gul tekst
+    public static final String BLÅ = "\u001B[34m";     // Blå tekst
+    public static final String CYAN = "\u001B[36m";    // Cyan tekst
+
     public PizzaMenu() {
-//Array over de forskellige Pizzaer
+        // Array over de forskellige Pizzaer
         pizzamenu.add(new Pizza(1, "Vesuvio", 57));
         pizzamenu.add(new Pizza(2, "Amerikaner", 53));
         pizzamenu.add(new Pizza(3, "Cacciatore", 57));
@@ -42,17 +49,21 @@ public class PizzaMenu {
         return pizzamenu;
     }
 
-    //Pizza menu metode.
+    // Pizza menu metode med farver
     public void visPizzaMenu() {
         if (pizzamenu.isEmpty()) {
-            System.out.println("ingen pizzaer, alt udsolgt!");
+            System.out.println(RØD + "Ingen pizzaer, alt udsolgt!" + RESET);
         } else {
-            System.out.println("\n === Menukort === \n");
-            System.out.printf("%-5s%-25s%-15s%-15s\n", "Nr.", "Pizza", "Pris", "Antal solgte");
-            for (Pizza pizza : pizzamenu) {
-                System.out.printf("%-5d%-25s%-15d%-15d\n", pizza.getNr(), pizza.getPizzanavn(), pizza.getPris(), pizza.getAntalSolgt());
+            System.out.printf(BLÅ + "\n === Menukort === \n" + RESET);
+            System.out.printf(GRØN + "%-5s%-25s%-15s%-15s\n" + RESET, "Nr.", "Pizza", "Pris", "Antal solgte");
 
-                //halløj
+            for (Pizza pizza : pizzamenu) {
+                System.out.printf(GUL + "%-5d" + CYAN + "%-25s" + GRØN + "%-15d" + RØD + "%-15d\n" + RESET,
+                        pizza.getNr(),
+                        pizza.getPizzanavn(),
+                        pizza.getPris(),
+                        pizza.getAntalSolgt()
+                );
             }
         }
     }

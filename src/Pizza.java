@@ -23,11 +23,9 @@ public class Pizza {
         this.pris = pris;
     }
 
-
     public void setAntalSolgt(int antal) {
-        this.antalSolgt += antal;
+        antalSolgt += antal;
     }
-
 
     public int getNr() {
         return nr;
@@ -37,9 +35,9 @@ public class Pizza {
         return pris;
     }
 
-    public int getAntal() {
-        return antal;
-    }
+//    public int getAntal() {
+//        return antal;
+//    }
 
     public String getPizzanavn() {
         return pizzanavn;
@@ -49,19 +47,17 @@ public class Pizza {
         return antalSolgt;
     }
 
-    public void opdaterAntalSolgt(int antal) {
-        this.antal += antalSolgt;
-    }
+//    public void opdaterAntalSolgt(int antal) {
+//        this.antal += antalSolgt;
+//    }
 
     public void setPris(int nyPris){
         this.pris = nyPris;
-
     }
-
 
     @Override
     public String toString() {
-        return  "------------------]" +
+        return  //"------------------]" +
                 "\nPizza: " + pizzanavn +
                 "\nNr: " + nr +
                 "\nAntal: " + antal +
