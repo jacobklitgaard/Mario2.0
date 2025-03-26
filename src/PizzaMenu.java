@@ -49,20 +49,21 @@ public class PizzaMenu {
         return pizzamenu;
     }
 
+    String menu = "=== Menukort ===";
+
     // Pizza menu metode med farver
     public void visPizzaMenu() {
         if (pizzamenu.isEmpty()) {
             System.out.println(RØD + "Ingen pizzaer, alt udsolgt!" + RESET);
         } else {
-            System.out.printf(BLÅ + "\n === Menukort === \n" + RESET);
-            System.out.printf(GRØN + "%-5s%-25s%-15s%-15s\n" + RESET, "Nr.", "Pizza", "Pris", "Antal solgte");
+            System.out.printf(BLÅ + "\n%40s\n", menu + RESET);
+            System.out.printf(GRØN + "\n%-5s%-25s%-15s%-15s\n" + RESET, "Nr.", "Pizza", "Pris", "Antal solgte");
 
             for (Pizza pizza : pizzamenu) {
                 System.out.printf(GUL + "%-5d" + CYAN + "%-25s" + GRØN + "%-15d" + RØD + "%-15d\n" + RESET,
                         pizza.getNr(),
                         pizza.getPizzanavn(),
-                        pizza.getPris(),
-                        pizza.getAntalSolgt()
+                        pizza.getPris()
                 );
             }
         }

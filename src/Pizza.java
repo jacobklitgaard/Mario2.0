@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 //Pizza konstruktor
 public class Pizza {
 
@@ -35,23 +34,11 @@ public class Pizza {
         return pris;
     }
 
-//    public int getAntal() {
-//        return antal;
-//    }
-
     public String getPizzanavn() {
         return pizzanavn;
     }
 
-    public int getAntalSolgt() {
-        return antalSolgt;
-    }
-
-//    public void opdaterAntalSolgt(int antal) {
-//        this.antal += antalSolgt;
-//    }
-
-    public void setPris(int nyPris){
+    public void setPris(int nyPris) {
         this.pris = nyPris;
     }
 
