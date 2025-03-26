@@ -22,7 +22,7 @@ public class Kunde {
     }
     @Override
     public String toString() {
-        return "\nNavn: " + getNavn() +
+        return "Navn: " + getNavn() +
                "\nTelefon: " + getTlf() +
                "\nAfhentning: " + getAfhentning();
     }

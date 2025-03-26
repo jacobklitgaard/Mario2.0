@@ -38,9 +38,9 @@ public class Ordre {
     public String toString() {
         for (int i = 0; i < pizzaliste.size()-1; i++) {
             pizzaliste.get(i);
-        } return "\nBestilling: \n" + pizzaliste + "\n\nNavn: " +
+        } return "\n" + pizzaliste + "\n\u001B[3mKundeoplysninger\u001B[0m:\nNavn: " +
                 kunde.getNavn() + "\nTelefon: " + kunde.getTlf() + "\nAfhentning: " + kunde.getAfhentning() + "\n" +
-                "\nTotal: " + totalPris;
+                "Total pris: " + totalPris + "kr\n";
     }
 
 //    public void markerSomBetalt(String Kunde) { //Denne metode markerer en ordre som betalt baseret på dens ID.
