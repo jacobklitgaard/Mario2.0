@@ -22,6 +22,10 @@ public class Pizza {
         this.pris = pris;
     }
 
+    public int getAntalSolgt() {
+        return antalSolgt;
+    }
+
     public void setAntalSolgt(int antal) {
         antalSolgt += antal;
     }

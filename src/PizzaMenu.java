@@ -63,7 +63,8 @@ public class PizzaMenu {
                 System.out.printf(GUL + "%-5d" + CYAN + "%-25s" + GRØN + "%-15d" + RØD + "%-15d\n" + RESET,
                         pizza.getNr(),
                         pizza.getPizzanavn(),
-                        pizza.getPris()
+                        pizza.getPris(),
+                        pizza.getAntalSolgt()
                 );
             }
         }

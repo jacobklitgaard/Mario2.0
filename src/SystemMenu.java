@@ -121,7 +121,7 @@ public class SystemMenu {
     private String navn;
     private LocalTime afhentning;
     private int totalPris = 0;
-    private int samletOmsætning;
+    private int samletOmsætning = 0;
     private int samletAntal;
     private PizzaMenu pizzamenu = new PizzaMenu();
 
@@ -186,7 +186,6 @@ public class SystemMenu {
             }
             pizza.setAntalSolgt(antal);
             totalPris += pizza.getPris() * antal; //Variable til totalpris
-            samletOmsætning += totalPris;
             samletAntal += antal;
         }
         //tilføjer telefon nummer til bestillingen.
@@ -231,6 +230,9 @@ public class SystemMenu {
         //ordrelisten printes.
         System.out.println(ordre);
         ordreliste.add(ordre);
+
+        samletOmsætning += totalPris;
+        totalPris = 0;
     }
 }
 
