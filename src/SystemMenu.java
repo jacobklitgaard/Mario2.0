@@ -8,7 +8,6 @@ public class SystemMenu {
     public static final String RØD = "\u001B[31m";     // Rød tekst
     public static final String GRØN = "\u001B[32m";    // Grøn tekst
     public static final String GUL = "\u001B[33m";     // Gul tekst
-    public static final String BLÅ = "\u001B[34m";     // Blå tekst
     public static final String CYAN = "\u001B[36m";    // Cyan tekst
     // Variabler og importerede klasser
     private Scanner scanner = new Scanner(System.in);
@@ -92,7 +91,7 @@ public class SystemMenu {
             System.out.println("\n--- Bestillinger ---");
             // Sorterer ordrene efter tid.
             Collections.sort(ordreliste, Comparator.comparing(o -> o.getKunde().getAfhentning()));
-            for (int i = 0; i < ordreliste.size(); i++){
+            for (int i = 0; i < ordreliste.size(); i++) {
                 System.out.println("\u001B[3mBestillingsnummer\u001B[0m: " + (i + 1) + ordreliste.get(i).toString());
             }
             System.out.println("Fjern ordre: Tast 1");
@@ -175,7 +174,6 @@ public class SystemMenu {
             Pizza pizzaMedAntal = new Pizza(pizza.getNr(), pizza.getPizzanavn(), antal, pizza.getPris());
             pizzaer.add(pizzaMedAntal);
             //Objektet tilføjes til ordreliste arrayListe
-            //ordrehistorik.tilføjPizza(pizzaMedAntal);
 
 
             //Giver user mulighed til at tilføje flere pizzaer

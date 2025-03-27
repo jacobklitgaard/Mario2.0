@@ -10,7 +10,7 @@ public class Kunde {
         this.navn = navn;
         this.afhentning = afhentning;
     }
-// Her laver vi getter, for at kunne hente oplysningene fra denne klasse over i en anden class.
+// Her laver vi getter, for at kunne hente oplysningerne fra denne klasse over i en anden class.
     public int getTlf(){
         return tlf;
     }
