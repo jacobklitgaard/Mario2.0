@@ -9,43 +9,52 @@ public class SystemMenu {
     public static final String GRØN = "\u001B[32m";    // Grøn tekst
     public static final String GUL = "\u001B[33m";     // Gul tekst
     public static final String CYAN = "\u001B[36m";    // Cyan tekst
+
     // Variabler og importerede klasser
     private Scanner scanner = new Scanner(System.in);
     private Pizza pizza;
     private String afhentningString;
 
-    ArrayList<Ordre> ordreliste = new ArrayList<>();
+    private ArrayList<Ordre> ordreliste = new ArrayList<>();
 
     //System menuen
     public void start() {
         boolean running = true;
 
         while (running) {   // While loop til at holde systemet igang
-            System.out.println(CYAN + "\n/// System Menu ///" + RESET);
-            System.out.println(GRØN + "1. Vis Menu" + RESET);
+            System.out.println("════════════════════════════════════════");
+            System.out.println(RØD + "         🍕 Mario's Pizzaria 🍕        " + RESET);
+            System.out.println("════════════════════════════════════════");
+            System.out.println(CYAN + "/// Systemmenu ///" + RESET);
+            System.out.println(GRØN + "1. Vis menu" + RESET);
             System.out.println(GUL + "2. Bestillinger" + RESET); // Ordreliste
             System.out.println(RØD + "3. Tilføj ordre" + RESET);
             System.out.println(GRØN + "4. Omsætning" + RESET);
             System.out.println(GUL + "5. Prisændring" + RESET);
-            System.out.println(RØD + "6. Afslut Program" + RESET);
+            System.out.println(RØD + "6. Afslut program" + RESET);
             System.out.print(CYAN + "\nIndtast valg: " + RESET);
 
-            int choice = scanner.nextInt();     //Gemmer brugerens input i en int
-            scanner.nextLine();                 // som bruges i Switch case
 
-            switch (choice) {   //Switch case til at navigere i menuen (aka de forskellige metoder).
-                case 1 -> visMenu();
-                case 2 -> visAktiveOrdrer();
-                case 3 -> tilfoejOrdre();
-                case 4 -> samletSalg();
-                case 5 -> ændrePris();
-                case 6 -> {
-                    System.out.println("\nSystem afsluttes...");
-                    running = false;    // Programmet afsluttes når man trykker på 7 (boolean == false).
-                    scanner.close();
+            try {   //Gemmer brugerens input i en int
+                int choice = scanner.nextInt();
+                scanner.nextLine();      // som bruges i Switch case
+                switch (choice) {   //Switch case til at navigere i menuen (aka de forskellige metoder).
+                    case 1 -> visMenu();
+                    case 2 -> visAktiveOrdrer();
+                    case 3 -> tilfoejOrdre();
+                    case 4 -> samletSalg();
+                    case 5 -> ændrePris();
+                    case 6 -> {
+                        System.out.println(GRØN + "\n**** System afsluttes ****");
+                        running = false;    // Programmet afsluttes når man trykker på 7 (boolean == false).
+                        scanner.close();
+                    }
+                    default -> System.out.println("Ugyldigt valg. Prøv igen."); // Sender fejlbesked og gentager kode
+                    //hvis der modtages forkert int
                 }
-                default -> System.out.println("Ugyldigt valg. Prøv igen."); // Sender fejlbesked og gentager kode
-                //hvis der modtages forkert int
+            } catch (InputMismatchException y) {
+                System.out.println("Forkert input");
+                scanner.nextLine(); // Buffer
             }
         }
     }
@@ -54,8 +63,17 @@ public class SystemMenu {
         Scanner input = new Scanner(System.in); // Her laver vi en scanner, hvor vi som bruger kan inputte noget eller ændre koden
         visMenu(); // den viser menuen
         System.out.println("Indtast nr på den pizza, du vil ændre prisen på"); // En print der spørg brugern hvilken pizza han vil ændre
-        int PizzaNummer = input.nextInt(); // Her har vi en int variabel der giver os muligheden for at indtaste nummeret på pizzaen der skal ændres
-        input.nextLine(); // Buffer
+
+        int PizzaNummer;
+
+        while (true) {  //Loop som sørger for, at der bliver indtastet tal.
+            try {
+                PizzaNummer = Integer.parseInt(input.nextLine()); // Forsøger at læse input som et tal
+                break; // Hvis det lykkes, stopper loopet
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt input! Indtast venligst et gyldigt tal.");
+            }
+        }
 
         Pizza ValgtPizza = null; // Initialiserer en variabel til at holde den valgte pizza. Sættes til null, hvis ingen pizza matches.
         for (Pizza pizza : pizzamenu.getPizzamenu()) { // Går igennem listen af pizzaer i menuen én efter én.
@@ -73,7 +91,17 @@ public class SystemMenu {
         }
         System.out.println("Indtast ny pris på " + ValgtPizza.getPizzanavn()); // Beder brugern om at indtaste den nye pris
 
-        int nyPris = input.nextInt(); // Gemmer den nye pris
+        int nyPris;
+
+        while (true) {  // Sørger for, at man ikke kan skrive et bogstav.
+            try {
+                nyPris = Integer.parseInt(input.nextLine()); // Forsøger at læse input som et tal
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt input! Indtast et tal.");
+            }
+        }
+
 
         ValgtPizza.setPris(nyPris); // vi bruger settter, og nu Opdatere den den nye pris.
         System.out.println("Prisen på " + ValgtPizza.getPizzanavn() + " er nu ændret til " + ValgtPizza.getPris() + " kr"); // bekræfter ændringerne
@@ -90,7 +118,9 @@ public class SystemMenu {
         while (running) {
             System.out.println("\n--- Bestillinger ---");
             // Sorterer ordrene efter tid.
+
             Collections.sort(ordreliste, Comparator.comparing(o -> o.getKunde().getAfhentning()));
+
             for (int i = 0; i < ordreliste.size(); i++) {
                 System.out.println("\u001B[3mBestillingsnummer\u001B[0m: " + (i + 1) + ordreliste.get(i).toString());
             }
@@ -127,9 +157,9 @@ public class SystemMenu {
 
     public void samletSalg() {
 
-        System.out.println("\nSolgte pizzaer: " + samletAntal);
-        System.out.println("Samlet omsætning: " + samletOmsætning + " kr. ");
-
+        System.out.println("════════════════════════════════════════");
+        System.out.printf("Solgte pizzaer: %d%n", samletAntal);
+        System.out.printf("Samlet omsætning: %d kr.%n", samletOmsætning);
     }
 
     private void tilfoejOrdre() {
@@ -137,6 +167,7 @@ public class SystemMenu {
         final String RESET = "\u001B[0m";
 
         ArrayList<Pizza> pizzaer = new ArrayList<>();
+
         boolean running = true;
         //While loop til at tilføje flere bestillinger
         while (running) {
@@ -175,11 +206,10 @@ public class SystemMenu {
             pizzaer.add(pizzaMedAntal);
             //Objektet tilføjes til ordreliste arrayListe
 
-
             //Giver user mulighed til at tilføje flere pizzaer
             System.out.println("Tilføj mere? j/n");
             String choice = scanner.nextLine().toLowerCase();
-            if (choice.equalsIgnoreCase("j")) { //Hvis ikke vælger "ja", lukker tilføj pizza loopet,
+            if (choice.equals("j")) { //Hvis ikke vælger "ja", lukker tilføj pizza loopet,
                 // og hopper videre til kundeoplysninger.
             } else {
                 running = false;

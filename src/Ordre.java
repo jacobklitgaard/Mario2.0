@@ -18,11 +18,15 @@ public class Ordre {
 
     @Override
     public String toString() {
-        for (int i = 0; i < pizzaliste.size() - 1; i++) {
-            pizzaliste.get(i);
+        String pizzaString = "";
+        for (int i = 0; i < pizzaliste.size(); i++) {
+            pizzaString += pizzaliste.get(i).toString() + "\n";
         }
-        return "\n" + pizzaliste + "\n\u001B[3mKundeoplysninger\u001B[0m:\nNavn: " +
-                kunde.getNavn() + "\nTelefon: " + kunde.getTlf() + "\nAfhentning: " + kunde.getAfhentning() + "\n" +
-                "Total pris: " + totalPris + "kr\n";
+        return  pizzaString +
+                "\n\u001B[3mKundeoplysninger\u001B[0m:\nNavn: " +
+                kunde.getNavn() +
+                "\nTelefon: " + kunde.getTlf() +
+                "\nAfhentning: " + kunde.getAfhentning() +
+                "\nTotal pris: " + totalPris + "kr\n";
     }
 }

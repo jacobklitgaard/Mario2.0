@@ -48,14 +48,15 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return  "]" +
-                "\nPizza: " + pizzanavn +
-                        "\nNr: " + nr +
-                        "\nAntal: " + antal +
-                        "\npris: " + pris + "kr" +
-                        "\nI alt: " + (pris * antal) + "kr\n"
-                        + "[";
+        final String RESET = "\u001B[0m";    // Nulstil farve
+        final String YELLOW = "\u001B[33m";  // Gul farve
+
+        return  "\n======================================\n" +
+                YELLOW + "Pizza   : " + RESET + pizzanavn + "\n" +
+                YELLOW + "Nr      : " + RESET + nr + "\n" +
+                YELLOW + "Antal   : " + RESET + antal + "\n" +
+                YELLOW + "Pris    : " + RESET + pris + " kr\n" +
+                YELLOW + "I alt   : " + RESET + (pris * antal) + " kr\n" +
+                "======================================";
     }
 }
-
-
